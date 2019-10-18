@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, NavLink, withRouter, Redirect } from "react-router-dom";
 import Login from "./Login";
+import styled from "styled-components";
 import BubblePage from "./BubblePage";
 
 function Container(props) {
@@ -17,13 +18,13 @@ function Container(props) {
   };
 
   return (
-    <div>
+    <StyledDiv>
       <nav>
-        <NavLink exact to="/">
+        <NavLink exact to="/" activeClassName="active">
           Login
         </NavLink>
         &nbsp;
-        <NavLink exact to="/colors">
+        <NavLink exact to="/colors" activeClassName="active">
           Colors
         </NavLink>
         &nbsp;
@@ -38,8 +39,15 @@ function Container(props) {
           component={props => withAuthCheck(BubblePage, props)}
         />
       </main>
-    </div>
+    </StyledDiv>
   );
 }
 
 export default withRouter(Container);
+
+const StyledDiv = styled.div`
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background: Navajo white;
+`;
