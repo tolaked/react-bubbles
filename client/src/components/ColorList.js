@@ -8,7 +8,6 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [addNew, setAddNew] = useState(false);
@@ -24,7 +23,7 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    const request = addNew ? axiosWithAuth().post : axiosWithAuth().put;
+    const request = addNew ? WithAuth().post : WithAuth().put;
     const url = addNew
       ? "http://localhost:5000/api/colors"
       : `http://localhost:5000/api/colors/${colorToEdit.id}`;
@@ -52,6 +51,16 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+    WithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => {
+        const id = res.data;
+        const newColors = colors.filter(el => el.id !== id);
+        updateColors(newColors);
+      })
+      .catch(err => {
+        alert(err);
+      });
   };
 
   return (
@@ -73,7 +82,7 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
-      {editing && (
+      {(editing || addNew) && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
           <label>

@@ -27,7 +27,6 @@ function Container(props) {
           Colors
         </NavLink>
         &nbsp;
-        {/* <NavLink to="/friends/:id">Friends</NavLink>&nbsp; */}
         <button onClick={Logout}>Logout</button>
       </nav>
 
@@ -38,11 +37,6 @@ function Container(props) {
           path="/colors"
           component={props => withAuthCheck(BubblePage, props)}
         />
-        {/* <Route
-          exact
-          path="/friends/:id"
-          component={props => withAuthCheck(SingleFriend, props)}
-        /> */}
       </main>
     </div>
   );
