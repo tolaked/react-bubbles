@@ -18,6 +18,12 @@ const ColorList = ({ colors, updateColors }) => {
     setAddNew(false);
   };
 
+  const addColor = () => {
+    setEditing(false);
+    setAddNew(true);
+    setColorToEdit(initialColor);
+  };
+
   const saveEdit = e => {
     e.preventDefault();
     // Make a put request to save your updated color
@@ -82,6 +88,7 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      <button onClick={addColor}>add</button>
       {(editing || addNew) && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
