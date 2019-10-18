@@ -27,8 +27,22 @@ const BubblePage = () => {
     return <Redirect to="/" />;
   };
 
+  useEffect(() => {
+    WithAuth()
+      .get("http://localhost:5000/api/friends")
+      .then(res => {
+        setFriends(res.data);
+      })
+      .catch(err => {
+        alert(err.error);
+      });
+  }, []);
+
   return (
     <>
+      <NavLink exact to="/">
+        Login
+      </NavLink>
       <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
     </>
