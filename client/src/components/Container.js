@@ -23,7 +23,7 @@ function Container(props) {
           Login
         </NavLink>
         &nbsp;
-        <NavLink exact to="/color">
+        <NavLink exact to="/colors">
           Colors
         </NavLink>
         &nbsp;
@@ -35,7 +35,7 @@ function Container(props) {
         <Route exact path="/" component={Login} />
         <Route
           exact
-          path="/color"
+          path="/colors"
           component={props => withAuthCheck(BubblePage, props)}
         />
         {/* <Route

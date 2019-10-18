@@ -6,35 +6,29 @@ import WithAuth from "../axios/index";
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-const initialState = [
-  {
-    color: "",
-    code: {
-      hex: ""
-    },
-    id: ""
-  }
-];
+// const initialState = [
+//   {
+//     color: "",
+//     code: {
+//       hex: ""
+//     },
+//     id: ""
+//   }
+// ];
 
 const BubblePage = () => {
-  const [colorList, setColorList] = useState(initialState);
+  const [colorList, setColorList] = useState([]);
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
-  const withAuthCheck = (Component, props) => {
-    if (localStorage.getItem("token")) {
-      return <Component {...props} />;
-    }
-    return <Redirect to="/" />;
-  };
 
   useEffect(() => {
     WithAuth()
-      .get("http://localhost:5000/api/friends")
+      .get("http://localhost:5000/api/colors")
       .then(res => {
         setColorList(res.data);
-      })
+      }, console.log(colorList))
       .catch(err => {
-        alert(err.error);
+        console.log(err.error);
       });
   }, []);
 

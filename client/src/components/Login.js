@@ -10,14 +10,10 @@ const Login = props => {
   const onSubmit = e => {
     e.preventDefault();
     axios
-      .post(
-        "http://localhost:5000/api/login",
-        {
-          username: usernameRef.current.value,
-          password: passwordRef.current.value
-        },
-        console.log("username", usernameRef)
-      )
+      .post("http://localhost:5000/api/login", {
+        username: usernameRef.current.value,
+        password: passwordRef.current.value
+      })
 
       .then(res => {
         localStorage.setItem("token", res.data.payload);
@@ -25,7 +21,6 @@ const Login = props => {
       })
       .catch(err => {
         console.log(err);
-        debugger;
       });
   };
   return (
