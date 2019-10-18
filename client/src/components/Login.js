@@ -1,23 +1,31 @@
 import React, { useRef } from "react";
 import axios from "axios";
 
-const Login = () => {
+const Login = props => {
   const usernameRef = useRef();
   const passwordRef = useRef();
+
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
-  const onSubmit = () => {
+  const onSubmit = e => {
+    e.preventDefault();
     axios
-      .post("http://localhost:8000", {
-        username: usernameRef.current.value,
-        passwordRef: usernameRef.current.value
-      })
+      .post(
+        "http://localhost:5000/api/login",
+        {
+          username: usernameRef.current.value,
+          password: passwordRef.current.value
+        },
+        console.log("username", usernameRef)
+      )
+
       .then(res => {
         localStorage.setItem("token", res.data.payload);
         props.history.push("/colors");
       })
       .catch(err => {
         console.log(err);
+        debugger;
       });
   };
   return (

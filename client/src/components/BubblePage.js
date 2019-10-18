@@ -20,9 +20,9 @@ const BubblePage = () => {
   const [colorList, setColorList] = useState(initialState);
   // fetch your colors data from the server when the component mounts
   // set that data to the colorList state property
-  const WithAuthCheck = (Component, props) => {
+  const withAuthCheck = (Component, props) => {
     if (localStorage.getItem("token")) {
-      <Component {...props} />;
+      return <Component {...props} />;
     }
     return <Redirect to="/" />;
   };
@@ -31,7 +31,7 @@ const BubblePage = () => {
     WithAuth()
       .get("http://localhost:5000/api/friends")
       .then(res => {
-        setFriends(res.data);
+        setColorList(res.data);
       })
       .catch(err => {
         alert(err.error);
